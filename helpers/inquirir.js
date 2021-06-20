@@ -25,30 +25,48 @@ const MenuInquiri = async()=>{
     console.log('==========================\n'.green);
 
     const respuesta = await inquirer.prompt(preguntas);
+   /*  console.log('--- ---', respuesta.opcion); */
     return respuesta;
+    
 
 
 }
 
 const Pausar = async() =>{
-
-    const preguntas =[{
-              name:'enter', type:'input',message:`Preione ${'ENTER'.red} para continuar..`,value:'enter'
+    const preguntaPausar =[{
+              name:'opcion', 
+              type:'input',
+              message:`Presione ${'ENTER'.red} para continuar..`,
     }];
     console.log('\n');
-    
-  const respuesta = await inquirer.prompt(preguntas);
+   const salida = await inquirer.prompt(preguntaPausar);
+  /*  console.log('Scope:',preguntaPausar); */
+   return salida;
+}
 
-  console.log('Scope:',respuesta);
-  
-  return respuesta;
-  
+const Leertarea = async(mensaje) =>{
+    const question =[{
+        type:'input',
+        message:mensaje,
+        name:'pregunta',
+        validate(value){
+            if (value.lenght === 0) {
+                return('Ingrese  un Valor');
+            }
+            return true;
+        }
+    }];
+    const salida = await inquirer.prompt(question);
+
+    return salida;
+
 }
 
 
 
 module.exports ={
     MenuInquiri,
-    Pausar
+    Pausar,
+    Leertarea
 
 }
